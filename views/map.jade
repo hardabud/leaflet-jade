@@ -1,0 +1,17 @@
+html
+	head
+	meta(charset="UTF-8")
+	link(rel="stylesheet" href="/leaflet/leaflet.css")
+	script(src="/leaflet/leaflet.js")
+body
+	div(id="map" style="height: 500px")
+	script.
+		var map = L.map('map');
+		var group = L.featureGroup([]).addTo(map);
+		var points =!{JSON.stringify(data)};
+		for (var i = 0; i < points.length; i++) {
+			marker = new L.marker([points[i].lat,points[i].lng])
+				.bindPopup(points[i].name)
+				.addTo(group);
+		}
+		map.fitBounds(group.getBounds());
